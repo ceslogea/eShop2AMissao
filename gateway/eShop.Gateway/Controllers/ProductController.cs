@@ -15,38 +15,39 @@ namespace eShop.Gateway.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductController : ControllerBase
     {
-        private readonly IBusClient _busClient;
 
-        public ProductController(IBusClient busClient)
+        public ProductController()
         {
-            _busClient = busClient;
         }
 
 
         [HttpGet("")]
         public async Task<IActionResult> Get()
         {
+            // TODO create handlers
+            // TODO create Query
             return Ok();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
+            // TODO create handlers
+            // TODO create Query
             return Ok();
         }
 
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateProduct command)
         {
-            // trak user
+            // TODO trak user
             //command.UserId = Guid.Parse(User.Identity.Name);
             
             command.Id = Guid.NewGuid();
             command.CreatedAt = DateTime.UtcNow;
-            await _busClient.PublishAsync(command);
-            
-            // await process from bus
-            //var entry = await Get(command.Id) as Product;
+
+            // TODO usar Polly client 
+            // TODO Criar Sender/Responsers
 
             return Accepted($"products/{command.Id}");
         }
