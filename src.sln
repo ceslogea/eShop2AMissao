@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Common", "commun\eSho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{391F4506-BF68-4BDA-BD44-03982F813B87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Gateway", "gateway\eShop.Gateway\eShop.Gateway.csproj", "{003EC47F-1693-4A61-BE84-463CD888112F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Gateway", "gateway\eShop.Gateway\eShop.Gateway.csproj", "{003EC47F-1693-4A61-BE84-463CD888112F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Order", "api\eShop.Order\eShop.Order.csproj", "{A1EC7CB8-535E-4CB1-86A2-2B1350572C51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Order", "api\eShop.Order\eShop.Order.csproj", "{A1EC7CB8-535E-4CB1-86A2-2B1350572C51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

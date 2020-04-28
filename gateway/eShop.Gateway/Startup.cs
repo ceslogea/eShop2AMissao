@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using eShop.Common.Mediator;
+using eShop.Common.Swagger;
+using eShop.Gateway.Domain.Repository;
+using eShop.Gateway.Domain.Repository.Interface;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace eShop.Gateway
 {
@@ -26,6 +25,11 @@ namespace eShop.Gateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //services.AddMongoDB();
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddSwagger("eshop.gateway", "v1");
+
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,12 +40,10 @@ namespace eShop.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
+            app.ConfigSwaggerServices("/swagger/v1/swagger.json", "eshop.gateway v1");
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

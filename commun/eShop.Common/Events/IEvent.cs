@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace eShop.Common.Events
 {
     //Marker interface

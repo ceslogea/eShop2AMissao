@@ -1,12 +1,11 @@
-﻿using eShop.Common.Mediator.Result;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace eShop.Common.Commands.Product
+namespace eShop.Gateway.Domain.Models
 {
-    public class CreateProduct : ICommand,  IRequest<MediatorResult>
+    public class ProductModel
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace eShop.Common.Events.Product
 {
-    public class ProductCreated : IEvent
+    public class ProductCreated : INotification, IEvent
     {
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }

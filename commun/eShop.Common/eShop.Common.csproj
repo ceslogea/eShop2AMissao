@@ -12,6 +12,7 @@
 
 
 	<ItemGroup>
+		<PackageReference Include="MediatR" Version="8.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.0" />
@@ -22,6 +23,13 @@
 		<PackageReference Include="RawRabbit.Operations.Publish" Version="2.0.0-beta8" />
 		<PackageReference Include="RawRabbit.Operations.Subscribe" Version="2.0.0-beta8" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="EntityFrameworkSQL\" />
+	  <Folder Include="Redis\" />
+	  <Folder Include="Polly\" />
 	</ItemGroup>
 	
 </Project>

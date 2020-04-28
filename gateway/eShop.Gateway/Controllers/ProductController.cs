@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eShop.Common.Commands.Product;
+using eShop.Common.Mediator;
+using eShop.Common.Mediator.Result;
+using eShop.Gateway.Query;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RawRabbit;
@@ -16,26 +20,40 @@ namespace eShop.Gateway.Controllers
     public class ProductController : ControllerBase
     {
 
-        public ProductController()
+        private readonly IMediator _mediator;
+
+        public ProductController(IMediator mediator)
         {
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
 
-        [HttpGet("")]
-        public async Task<IActionResult> Get()
-        {
-            // TODO create handlers
-            // TODO create Query
-            return Ok();
-        }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> Get(Guid id)
+        //{
+        //    var product = await _mediator.Send(new GetProductDetailHandler(id));
+        //    if (product == null) {
+        //        return NotFound();
+        //    }
+        //    return Ok(product);
+        //}
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            // TODO create handlers
-            // TODO create Query
-            return Ok();
-        }
+
+        //[HttpGet("")]
+        //public async Task<IActionResult> Get()
+        //{
+        //    // TODO create handlers
+        //    // TODO create Query
+        //    return Ok();
+        //}
+
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> Get(Guid id)
+        //{
+        //    // TODO create handlers
+        //    // TODO create Query
+        //    return Ok();
+        //}
 
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateProduct command)
@@ -45,7 +63,7 @@ namespace eShop.Gateway.Controllers
             
             command.Id = Guid.NewGuid();
             command.CreatedAt = DateTime.UtcNow;
-
+            MediatorResult result = await _mediator.Send(command);
             // TODO usar Polly client 
             // TODO Criar Sender/Responsers
 

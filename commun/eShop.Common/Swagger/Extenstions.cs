@@ -18,6 +18,11 @@ namespace eShop.Common.Swagger
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jsonUrl">/swagger/{version}/swagger.json</param>
+        /// <param name="endpointName">Endpoint name</param>
         public static void ConfigSwaggerServices(this IApplicationBuilder app, string jsonUrl, string endpointName) 
         {
 
