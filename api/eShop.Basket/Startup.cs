@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using eShop.Basket.Domain.Repository;
+using eShop.Basket.Domain.Repository.Interface;
+using eShop.Basket.Handlers;
+using eShop.Common.Events;
+using eShop.Common.Events.Product;
+using eShop.Common.Mongo;
+using eShop.Common.RabbitMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace eShop.Basket
 {
@@ -26,6 +26,10 @@ namespace eShop.Basket
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMongoDB(Configuration);
+            services.AddRabbitMq(Configuration);
+            services.AddScoped<IEventHandler<ProductCreated>, ProductCreatedHandler>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

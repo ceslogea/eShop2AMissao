@@ -1,28 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
+using eShop.Catalog.Domain.Repository;
+using eShop.Catalog.Domain.Repository.Interface;
 using eShop.Catalog.Domain.Services;
 using eShop.Catalog.Domain.Services.Interface;
-using eShop.Catalog.Handlers;
 using eShop.Common.Auth;
-using eShop.Common.Commands.Product;
-using eShop.Common.Mediator;
-using eShop.Common.Mediator.Result;
 using eShop.Common.Mongo;
 using eShop.Common.RabbitMq;
 using eShop.Common.Swagger;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 
 namespace eShop.Catalog
 {
@@ -39,14 +32,13 @@ namespace eShop.Catalog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddGrpc();    
             services.AddJwt(Configuration);
             services.AddSwagger("Products", "v1");
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
-            services.AddScoped<IRequestHandler<CreateProduct, MediatorResult>, CreateProductHandler>();
-
-            services.AddScoped<IMediatorHandler, InMemoryBus>();
-
+            services.AddMongoDB(Configuration);
+            services.AddRabbitMq(Configuration);
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +56,21 @@ namespace eShop.Catalog
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGet("/_proto/", async ctx =>
+                {
+                    ctx.Response.ContentType = "text/plain";
+                    using var fs = new FileStream(Path.Combine(env.ContentRootPath, "Proto", "product.proto"), FileMode.Open, FileAccess.Read);
+                    using var sr = new StreamReader(fs);
+                    while (!sr.EndOfStream)
+                    {
+                        var line = await sr.ReadLineAsync();
+                        if (line != "/* >>" || line != "<< */")
+                        {
+                            await ctx.Response.WriteAsync(Environment.NewLine + line);
+                        }
+                    }
+                });
+                endpoints.MapGrpcService<ProductService>();
             });
         }
     }

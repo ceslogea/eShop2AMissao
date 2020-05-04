@@ -1,14 +1,14 @@
-﻿using eShop.Catalog.Domain.Models;
+﻿using eShop.Catalog.Domain.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace eShop.Catalog.Domain.Repository
+namespace eShop.Catalog.Domain.Repository.Interface
 {
     public interface IProductRepository
     {
         Task<IEnumerable<Product>> BrowseAsync();
         Task<Product> GetAsync(Guid id);
+        Task AddAsync(Product product);
     }
 }

@@ -1,14 +1,11 @@
-using eShop.Common.Mediator;
+using eShop.Common.Mongo;
+using eShop.Common.RabbitMq;
 using eShop.Common.Swagger;
-using eShop.Gateway.Domain.Repository;
-using eShop.Gateway.Domain.Repository.Interface;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
 
 namespace eShop.Gateway
 {
@@ -26,10 +23,10 @@ namespace eShop.Gateway
         {
             services.AddControllers();
             //services.AddMongoDB();
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            // services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
             services.AddSwagger("eshop.gateway", "v1");
-
-            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddMongoDB(Configuration);
+            services.AddRabbitMq(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

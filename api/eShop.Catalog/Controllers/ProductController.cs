@@ -1,11 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using eShop.Catalog.Domain.Repository;
-using eShop.Common.Commands.Product;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using eShop.Catalog.Domain;
+using eShop.Catalog.Domain.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
-using RawRabbit;
 
 namespace eShop.Catalog.Controllers
 {
@@ -14,33 +10,22 @@ namespace eShop.Catalog.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _repository;
+        private readonly IProductService _productService;
 
-        public ProductController(IProductRepository repository)
+        public ProductController(IProductService productService)
         {
-            _repository = repository;
+            _productService = productService;
         }
 
 
-        [HttpGet("")]
-        public async Task<IActionResult> Get()
+        [HttpPost]
+        public async Task<IActionResult> Post(AddProductModel productModel)
         {
-            var products = await _repository
-                .BrowseAsync();
-
-            return Ok(products);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            var product = await _repository.GetAsync(id);
-            if (product == null)
-            {
-                return NotFound();
+            var productCreated = await _productService.AddAsync(productModel);
+            if(productCreated != null){
+                return Ok(productCreated);
             }
-         
-            return Ok(product);
+            return BadRequest();
         }
     }
 }
