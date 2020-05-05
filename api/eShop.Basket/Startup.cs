@@ -26,9 +26,9 @@ namespace eShop.Basket
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IEventHandler<ProductCreated>, ProductCreatedHandler>();
             services.AddRabbitMq(Configuration);
             services.AddMongoDB(Configuration);
+            services.AddTransient<IEventHandler<ProductCreated>, ProductCreatedHandler>();
             services.AddScoped<IProductRepository, ProductRepository>();
         }
 
