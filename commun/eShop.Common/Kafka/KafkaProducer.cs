@@ -31,7 +31,7 @@ namespace eShop.Common.Kafka
             await Task.CompletedTask;
         }
 
-        private static string GetTopicName<T>()
+        public static string GetTopicName<T>()
             => $"{Assembly.GetEntryAssembly().GetName().Name}-{typeof(T).Name}";
 
         /// <summary>

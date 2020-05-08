@@ -1,8 +1,11 @@
+using Confluent.Kafka;
 using eShop.Basket.Domain.Repository;
 using eShop.Basket.Domain.Repository.Interface;
 using eShop.Basket.Handlers;
 using eShop.Common.Events;
 using eShop.Common.Events.Product;
+using eShop.Common.HostedServices;
+using eShop.Common.Kafka;
 using eShop.Common.Mongo;
 using eShop.Common.RabbitMq;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +33,10 @@ namespace eShop.Basket
             services.AddMongoDB(Configuration);
             services.AddTransient<IEventHandler<ProductCreated>, ProductCreatedHandler>();
             services.AddScoped<IProductRepository, ProductRepository>();
+
+         
+            services.AddKafkaConsumerConfig(Configuration);
+            services.AddKafkaConsumerEventHandlers<ProductCreated>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

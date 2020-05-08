@@ -1,13 +1,16 @@
 ﻿using Confluent.Kafka;
+using eShop.Common.Events;
+using eShop.Common.HostedServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace eShop.Common.Kafka
 {
     public static class Extensions
     {
         /// <summary>
-        /// It binds producer config sections.
+        /// Binds producer config section.
         /// </summary>
         public static void AddKafkaProducer(this IServiceCollection services, IConfiguration configuration)
         {
@@ -16,5 +19,25 @@ namespace eShop.Common.Kafka
             services.AddSingleton(producerConfig);
             services.AddSingleton<IKafkaProducer>(_ => new KafkaProducer(_.GetRequiredService<ProducerConfig>()));
         }
+
+        /// <summary>
+        /// Binds consumer config section.
+        /// </summary>
+        public static void AddKafkaConsumerConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            var consumerConfig = new ConsumerConfig();
+            configuration.Bind("consumer", consumerConfig);
+            services.AddSingleton(consumerConfig);
+        }
+
+
+        /// <summary>
+        /// Binds consumer config section.
+        /// </summary>
+        public static void AddKafkaConsumerEventHandlers<TEvent>(this IServiceCollection services, IConfiguration configuration) where TEvent : IEvent
+        {
+            services.AddSingleton<IHostedService, EventHostedService<TEvent>>(_ => new EventHostedService<TEvent>(_));
+        }
+
     }
 }
