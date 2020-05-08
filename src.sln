@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{FB4BF9E5-8732-49D1-8418-905517585501}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Basket", "api\eShop.Basket\eShop.Basket.csproj", "{6A7D0872-B1CB-4D85-827D-DDEE37A431C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Basket", "api\basket\eShop.Basket\eShop.Basket.csproj", "{6A7D0872-B1CB-4D85-827D-DDEE37A431C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Catalog", "api\eShop.Catalog\eShop.Catalog.csproj", "{713A84B6-70B4-4FFC-AAA1-9B8611912E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Catalog", "api\catalog\eShop.Catalog\eShop.Catalog.csproj", "{713A84B6-70B4-4FFC-AAA1-9B8611912E6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Identity", "api\eShop.Identity\eShop.Identity.csproj", "{11816D70-4992-46CA-A086-C0FDBE139D61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Identity", "api\identity\eShop.Identity\eShop.Identity.csproj", "{11816D70-4992-46CA-A086-C0FDBE139D61}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "commun", "commun", "{DE1A1360-33F9-45C7-A1DE-4FC1DC65B8D8}"
 EndProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{391F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Gateway", "gateway\eShop.Gateway\eShop.Gateway.csproj", "{003EC47F-1693-4A61-BE84-463CD888112F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Order", "api\eShop.Order\eShop.Order.csproj", "{A1EC7CB8-535E-4CB1-86A2-2B1350572C51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Order", "api\order\eShop.Order\eShop.Order.csproj", "{A1EC7CB8-535E-4CB1-86A2-2B1350572C51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

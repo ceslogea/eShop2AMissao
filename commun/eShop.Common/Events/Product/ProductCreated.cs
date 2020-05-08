@@ -11,14 +11,14 @@ namespace eShop.Common.Events.Product
         public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public string Image { get; set; }
 
         protected ProductCreated()
         {
         }
 
-        public ProductCreated(Guid id, string name, string description, string price, string image ,DateTime createdAt)
+        public ProductCreated(Guid id, string name, string description, double price, string image ,DateTime createdAt)
         {
             Id = id;
             Name = name;
