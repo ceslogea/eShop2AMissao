@@ -4,7 +4,7 @@
 - Sistema baseado em microserviços.
 - Todos os microserviços devem ser idependentes respeitando os princípios de microserviços, 
 - Não devem compartilhar sua base de dados e devem possuir tolerante a falhas no caso de comunicação direta com outro microserviço (como mencionado acima).
-- Todos os microserviços devem ser idependentes arquiteturalmente.
+- Todos os microserviços devem ser idependentes arquiteturalmente, podendo utilizar em sua demanda DDD, CQRS ou outras, de acordo com a necessidade..
 - Todos os microserviços devem ser idependentes em seu contexto de negócio (sem domínio compartilhado).
 - Integrações deverão utilizar "Event Source".
 - Todos os microserviços devem contemplar testes unitários 
