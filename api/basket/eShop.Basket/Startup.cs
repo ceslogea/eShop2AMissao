@@ -8,6 +8,7 @@ using eShop.Common.HostedServices;
 using eShop.Common.Kafka;
 using eShop.Common.Mongo;
 using eShop.Common.RabbitMq;
+using eShop.Common.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,12 +31,12 @@ namespace eShop.Basket
         {
             services.AddControllers();
             services.AddRabbitMq(Configuration);
-            services.AddMongoDB(Configuration);
-            services.AddTransient<IEventHandler<ProductCreated>, ProductCreatedHandler>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-
+            services.AddMongoDBTransient(Configuration);
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddSwagger("Basket", "v1");
             services.AddKafkaConsumerConfig(Configuration);
-            services.AddKafkaConsumerEventHandlers<ProductCreated>(Configuration);
+            services.AddTransient<IEventHandler<ProductCreated>, ProductCreatedHandler>();
+            services.AddKafkaConsumerEventHandlers<ProductCreated>("eShop.Catalog-ProductCreated");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

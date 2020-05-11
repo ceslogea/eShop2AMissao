@@ -1,21 +1,26 @@
+using System;
 using System.Threading.Tasks;
 using eShop.Basket.Domain.Entity;
 using eShop.Basket.Domain.Repository.Interface;
 using eShop.Common.Events;
 using eShop.Common.Events.Product;
+using eShop.Common.Mongo;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace eShop.Basket.Handlers
 {
     public class ProductCreatedHandler : IEventHandler<ProductCreated>
     {
-        private readonly IProductRepository _productRepository;
         private readonly ILogger _logger;
+        private readonly IProductRepository _productRepository;
 
-         public ProductCreatedHandler(IProductRepository productRepository, ILogger<ProductCreatedHandler> logger)
+        public ProductCreatedHandler(ILogger<ProductCreatedHandler> logger, IProductRepository productRepository)
         {
-            _productRepository = productRepository;
             _logger = logger;
+            _productRepository = productRepository;
         }
 
         public async Task HandleAsync(ProductCreated @event)
