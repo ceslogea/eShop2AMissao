@@ -9,8 +9,6 @@ using RawRabbit;
 using System;
 using System.Threading.Tasks;
 using static CatalogApi.Catalog;
-using static eShop.Common.Kafka.Producer;
-using static eShop.Common.Kafka.Consumer;
 using eShop.Common.Kafka;
 
 namespace eShop.Catalog.Domain.Services
@@ -65,7 +63,7 @@ namespace eShop.Catalog.Domain.Services
                 var product = Product.NewProduct(productModel);
                 await AddProduct(product);
                 await PublishProductKafka(product);
-                await PublishProductRabbitMQ(product);
+                // await PublishProductRabbitMQ(product);
                 return await GetItemById(new CatalogItemRequest() { Id = product.Id.ToString() }, context);
             }
             catch (Exception ex)

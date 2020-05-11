@@ -13,18 +13,12 @@ namespace eShop.Basket.Domain.Repository
     public class ProductRepository : IProductRepository
     {
         private readonly IMongoDatabase _database;
-        private readonly IMongoClient _client;
-        
-        public ProductRepository(IMongoDatabase database)
-        {
-           _database = database;
-        }
 
-        // public ProductRepository(IServiceProvider serviceProvider, IMongoClient client)
-        // {
-        //     _client = client;
-        //     _database = _client.GetDatabase(serviceProvider.GetService<IOptions<MongoOptions>>().Value.Database);
-        // }
+        public ProductRepository(IOptions<MongoOptions> options)
+        {
+            var client = new MongoClient();
+            _database = client.GetDatabase(options.Value.Database);
+        }
 
         public async Task<Product> GetAsync(Guid id)
         => await Collection
@@ -37,6 +31,6 @@ namespace eShop.Basket.Domain.Repository
 
         private IMongoCollection<Product> Collection
             => _database.GetCollection<Product>("Products");
-        
+
     }
 }

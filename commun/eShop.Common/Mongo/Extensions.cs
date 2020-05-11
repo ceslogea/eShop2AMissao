@@ -16,6 +16,7 @@ namespace eShop.Common.Mongo
 
                 return new MongoClient(options.Value.ConnectionString);
             });
+            services.AddSingleton<IMongoClient>(new MongoClient());
             services.AddScoped<IMongoDatabase>(c => 
             {
                 var options = c.GetService<IOptions<MongoOptions>>();
@@ -25,6 +26,7 @@ namespace eShop.Common.Mongo
             });
             services.AddScoped<IDatabaseInitializer, MongoInitializer>();
             services.AddScoped<IDatabaseSeeder, MongoSeeder>();
-        }        
+        }
+
     }
 }

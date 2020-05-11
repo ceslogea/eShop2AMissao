@@ -34,9 +34,9 @@ namespace eShop.Common.Kafka
         /// <summary>
         /// Binds consumer config section.
         /// </summary>
-        public static void AddKafkaConsumerEventHandlers<TEvent>(this IServiceCollection services, IConfiguration configuration) where TEvent : IEvent
+        public static void AddKafkaConsumerEventHandlers<TEvent>(this IServiceCollection services, string topic) where TEvent : IEvent
         {
-            services.AddSingleton<IHostedService, EventHostedService<TEvent>>(_ => new EventHostedService<TEvent>(_));
+            services.AddSingleton<IHostedService, EventHostedService<TEvent>>(_ => new EventHostedService<TEvent>(_, topic));
         }
 
     }

@@ -31,7 +31,7 @@ namespace eShop.Basket
         {
             services.AddControllers();
             services.AddRabbitMq(Configuration);
-            services.AddMongoDBTransient(Configuration);
+            services.AddMongoDB(Configuration);
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSwagger("Basket", "v1");
             services.AddKafkaConsumerConfig(Configuration);
