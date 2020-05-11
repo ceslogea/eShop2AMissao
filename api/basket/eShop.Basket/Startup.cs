@@ -34,7 +34,6 @@ namespace eShop.Basket
             services.AddTransient<IEventHandler<ProductCreated>, ProductCreatedHandler>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
-         
             services.AddKafkaConsumerConfig(Configuration);
             services.AddKafkaConsumerEventHandlers<ProductCreated>(Configuration);
         }
