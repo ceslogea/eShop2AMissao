@@ -55,6 +55,7 @@ public class Startup
   },
 ```
 
+- Add database (***IMongoDatabase***):
 
 ```dotnetcli
 public class Startup
