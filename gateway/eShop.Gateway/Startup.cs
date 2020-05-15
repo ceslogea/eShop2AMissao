@@ -24,8 +24,8 @@ namespace eShop.Gateway
             services.AddControllers();
             //services.AddMongoDB();
             // services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            // services.AddMongoDB(Configuration);
             services.AddSwagger("eshop.gateway", "v1");
-            services.AddMongoDB(Configuration);
             services.AddRabbitMq(Configuration);
         }
 

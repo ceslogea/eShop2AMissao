@@ -1,14 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using eShop.Basket.Domain.Entity;
 using eShop.Basket.Domain.Repository.Interface;
 using eShop.Common.Events;
 using eShop.Common.Events.Product;
-using eShop.Common.Mongo;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 
 namespace eShop.Basket.Handlers
 {

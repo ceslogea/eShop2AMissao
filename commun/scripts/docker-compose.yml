@@ -13,6 +13,7 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+      
   kafka-server1:
     image: 'bitnami/kafka:latest'
     networks:

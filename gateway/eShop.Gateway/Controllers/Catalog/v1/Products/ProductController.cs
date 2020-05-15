@@ -4,11 +4,13 @@ using Grpc.Net.Client;
 using Microsoft.AspNetCore.Mvc;
 using CatalogApi;
 using eShop.Gateway.Domain.Model;
+using Grpc.Core;
+using Grpc.Core.Logging;
 
-namespace eShop.Gateway.Controllers
+namespace eShop.Gateway.Controllers.CatalogApi.v1.Products
 {
 
-    [Route("api/product")]
+    [Route("api/catalog/v1/product")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductController : ControllerBase
@@ -26,7 +28,7 @@ namespace eShop.Gateway.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5005");
+            using var channel = GrpcChannel.ForAddress(Environment.GetEnvironmentVariable("catalogurl"));
             var client = new Catalog.CatalogClient(channel);
             var request = new CatalogItemRequest { Id = id.ToString() };
             var reply = await client.GetItemByIdAsync(request);
@@ -39,8 +41,10 @@ namespace eShop.Gateway.Controllers
 
             // TODO trak user
             //command.UserId = Guid.Parse(User.Identity.Name);
-
-            using var channel = GrpcChannel.ForAddress("https://localhost:5005/api/product");
+            //Environment.SetEnvironmentVariable("NO_PROXY", "localhost");
+            GrpcEnvironment.SetLogger(new ConsoleLogger());
+            Console.WriteLine(Environment.GetEnvironmentVariable("catalogurl"));
+            using var channel = GrpcChannel.ForAddress($"{Environment.GetEnvironmentVariable("catalogurl")}/api/product");
             var client = new Catalog.CatalogClient(channel);
             var request = new AddProductRequest { 
                 Name = productModel.Name,
