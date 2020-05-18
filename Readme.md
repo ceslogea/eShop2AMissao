@@ -17,6 +17,17 @@ Esta abordagem tem como foco possibilitar benefícios como:
     - Proporcionar facil re-utilização da infraestrutura e base funcional dos projetos,
     - Hemogenia para resultados de BI, telemetria e afins.
 
+**Diagrama estrutural:**
+
+![Alt text](\Api%20Docs/overview.png?raw=true "Title")
+
+**Diagrama de serviços:**
+
+![Alt text](\Api%20Docs/Services.png?raw=true "Title")
+
+**Diagrama de implmentação:**
+
+![Alt text](\Api%20Docs/implementations.png?raw=true "Title")
 
 **Testes**:
 | Integration | Domain | Integration |
@@ -29,7 +40,7 @@ Esta abordagem tem como foco possibilitar benefícios como:
 | Order       | 0%     | 0%          |
 
 
-- Frameworks e tecnologias disponibilizadas na **eShop.Commun**
+- **Docs eShop.Commun / Nuget**
 
 **Swagger**
 
@@ -180,3 +191,27 @@ public class Startup
     }
 }
 ```
+**Dotnet CLI**
+
+- Run
+```dotnetcli
+dotnet run -p gateway/eshop.Gateway --urls="http://localhost:5000"
+dotnet run -p api/catalog/eshop.catalog --urls="http://localhost:5005"
+dotnet run -p api/basket/eshop.basket --urls="http://localhost:5007"
+dotnet run -p api/identity/eshop.identity --urls="http://localhost:5011"
+dotnet run -p api/order/eshop.order --urls="http://localhost:5009"
+```
+
+- Test
+
+`***TODO***`
+
+**Docker**
+
+- Run
+
+`***TODO***`
+
+- Test
+
+`***TODO***`
