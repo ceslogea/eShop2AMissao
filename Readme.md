@@ -19,15 +19,16 @@ Esta abordagem tem como foco possibilitar benefícios como:
 
 **Diagrama estrutural:**
 
-![Alt text](\Api%20Docs/overview.png?raw=true "Title")
+![Alt text](https://github.com/ceslogea/eShop2AMissao/blob/master/Api%20Docs/overview.png?raw=true "Title")
 
 **Diagrama de serviços:**
 
-![Alt text](\Api%20Docs/Services.png?raw=true "Title")
+![Alt text](https://github.com/ceslogea/eShop2AMissao/blob/master/Api%20Docs/Services.png?raw=true "Title")
 
 **Diagrama de implmentação:**
 
-![Alt text](\Api%20Docs/implementations.png?raw=true "Title")
+![Alt text](https://github.com/ceslogea/eShop2AMissao/blob/master/Api%20Docs/implementations.png?raw=true "Title")
+
 
 **Testes**:
 | Integration | Domain | Integration |
